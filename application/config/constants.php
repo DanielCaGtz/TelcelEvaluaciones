@@ -84,13 +84,12 @@ defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
-defined('FILE_ROUTE_FULL')     OR define('FILE_ROUTE_FULL','/usr/local/var/www/telcel/');
+#defined('FILE_ROUTE_FULL')     OR define('FILE_ROUTE_FULL','/Library/WebServer/Documents/telcel/');
 #/home/u465027285/public_html/telcel
-#defined('FILE_ROUTE_FULL')     OR define('FILE_ROUTE_FULL','/home/u465027285/public_html/telcelevaluaciones/');
+defined('FILE_ROUTE_FULL')     OR define('FILE_ROUTE_FULL','/home/u465027285/public_html/telcelevaluaciones/');
 
 defined('CURRENT_VERSION')		OR define('CURRENT_VERSION','1.2.1');
 defined('MAIN_TEST')			OR define('MAIN_TEST','AVENTURA');
 defined('CLAVE_AVENTURA')		OR define('CLAVE_AVENTURA', 'AD2474');
-
-defined('CLAVE_RECONSTRUYE')	OR define('CLAVE_RECONSTRUYE', 'COMP2');
+defined('CLAVE_RECONSTRUYE')	OR define('CLAVE_RECONSTRUYE', 'RECONS');
 defined('v2_TEST')				OR define('v2_TEST','COMPETENCIA');

@@ -35,6 +35,7 @@
 		<div class="login-box" id="main_header_box">
 			<div class="login-logo"><a href="<?php echo base_url(); ?>"><img style="width: 240px;" src="<?php echo base_url(); ?>img/logo_telcel_gray.png"></a></div>
 			<h3>Bienvenido(a) <?php echo $this->session->userdata("nombre"); ?></h3>
+			<h5>¿No es tu nombre? <a style="color:white;text-decoration:underline;" id="regenerate_session" href="#">Da click aquí para actualizar tus datos.</a></h5>
 			<?php if(intval($this->session->userdata("idPermisos"))===0){ ?>
 			<h4>Tu grupo es: <?php echo $this->session->userdata("nombre_grupo"); ?></h4>
 			<?php }
@@ -178,7 +179,7 @@
 				});
 			});
 			$(document).ready(function(){
-				$("#regenerate_session").on("click",function(){this.location.reload();});
+				$("#regenerate_session").on("click",function(){location.reload(true);});
 				$(".start_admin_test").on("click",function(){
 					var id = $(this).attr("data-id");
 					var user = $(this).parent().find(".usuarios").val();

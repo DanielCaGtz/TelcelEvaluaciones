@@ -75,11 +75,13 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => 'root',
+	'hostname' => 'mysql.hostinger.mx',
+	#'hostname' => '31.220.20.84',
+	'username' => 'u465027285_tel',
+	'password' => 'KUqAqSRN6ydb',
+	#'username' => 'u465027285_sandg',
+	#'password' => 'Govodt5UkHQIdFRGp5',
 	'database' => 'u465027285_tel',
-	#'database' => 'preguntas_telcel',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

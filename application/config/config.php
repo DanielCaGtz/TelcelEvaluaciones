@@ -35,7 +35,7 @@ $config['modules_locations'] = array(
 | a PHP script and you can easily do that on your own.
 |
 */
-$nombre_ruta_host = '/telcel/';
+$nombre_ruta_host = '/';
 $config['nombre_ruta_host'] = $nombre_ruta_host;
 $config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http").'://'.$_SERVER['HTTP_HOST'].$nombre_ruta_host;
 
@@ -227,7 +227,7 @@ $config['directory_trigger'] = 'd';
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 0;
+$config['log_threshold'] = 1;
 
 /*
 |--------------------------------------------------------------------------
@@ -328,7 +328,7 @@ $config['cache_query_string'] = FALSE;
 | http://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = 'MIGfMA0GCSqGSIb3DQR8APvniGY/IemkVx7aIV61rAMBv9ra4yRKvHY9W+Mb1qIGkYVlgSWCYi7ayuceZ7machu2ekuput7aruPe2A5ETbb3jKkvloXlPG8bD7EiT/jLtfBUyueVvpu7QYYdXQIDAQAB';
+$config['encryption_key'] = 'MIGfMA0GCSqGSIb3DQR8APvniGY/IemkVx7aIV61rAMBv9ra4yRKvHY9W+Mb1qIGkYVlgSWCYi7ayuceZ7machu2ekuput7aruPe2A5ETbb3jKkvloXlPG8bD7EiT/jLtfBUyueVvAhwyRuwiPEodMDAQAB';
 
 /*
 |--------------------------------------------------------------------------
@@ -382,12 +382,13 @@ $config['encryption_key'] = 'MIGfMA0GCSqGSIb3DQR8APvniGY/IemkVx7aIV61rAMBv9ra4yR
 |
 */
 $config['sess_driver'] = 'files';
-$config['sess_cookie_name'] = '7ayuceZ7machu2ekuput7aruPe2A5E';
-$config['sess_use_database']	= FALSE;
+$config['sess_cookie_name'] = '7ayuceZ7maRt82ekuput7aruPe2A5E';
+#$config['sess_use_database']	= FALSE;
 $config['sess_expiration'] = 0;
-$config['sess_save_path'] = NULL;
+//$config['sess_save_path'] = sys_get_temp_dir();
+$config['sess_save_path'] = FILE_ROUTE_FULL.'ci_sessions/';
 $config['sess_match_ip'] = FALSE;
-$config['sess_time_to_update'] = 300;
+$config['sess_time_to_update'] = 0;
 $config['sess_regenerate_destroy'] = FALSE;
 $config['sess_expire_on_close'] = TRUE;
 
@@ -457,8 +458,8 @@ $config['global_xss_filtering'] = FALSE;
 $config['csrf_protection'] = FALSE;
 $config['csrf_token_name'] = 'csrf_test_name';
 $config['csrf_cookie_name'] = 'csrf_cookie_name';
-$config['csrf_expire'] = 7200;
-$config['csrf_regenerate'] = TRUE;
+$config['csrf_expire'] = 0;
+$config['csrf_regenerate'] = FALSE;
 $config['csrf_exclude_uris'] = array();
 
 /*

@@ -59,7 +59,7 @@
 					$q="";
 					if(intval($permisos["idInstructor"])>0) $q="AND ppal.idGrupo IN (SELECT id FROM grupos WHERE idInstructor='".$permisos["idInstructor"]."')";
 					elseif(intval($permisos["idDespacho"])>0) $q="AND ppal.idInstructor IN (SELECT id FROM instructores WHERE idDespacho='".$permisos["idDespacho"]."')";
-					$query_new="SELECT ppal.*, DATE(ppal.date_start) AS date_user, (SELECT nombre FROM grupos WHERE id=ppal.idGrupo) AS nombreGrupo FROM usuarios AS ppal WHERE ppal.id NOT IN (SELECT idUsuario FROM usuarios_permisos) $q ORDER BY ppal.date_start DESC LIMIT 1500";
+					$query_new="SELECT ppal.*, DATE(ppal.date_start) AS date_user, (SELECT nombre FROM grupos WHERE id=ppal.idGrupo) AS nombreGrupo FROM usuarios AS ppal WHERE ppal.id NOT IN (SELECT idUsuario FROM usuarios_permisos) $q ORDER BY id";
 					#echo $query_new;
 					$data=$controller->get_data_from_query($query_new); if($data!==FALSE){ foreach($data AS $e=>$key){
 
@@ -75,8 +75,10 @@
 							<select class="change_status">
 								<option value=""></option>
 								<?php
-									if (strlen($key["estatus"]) > 0) $s = $key["estatus"];
-									else $s = "";
+									if(strlen($key["estatus"])>0) $s=$key["estatus"]; else{
+										$s="";
+
+									}
 									$pagos=array("AS"=>"ASISTIÓ","NA"=>"NO ASISTIÓ","AP"=>"ASISTENCIA PARCIAL","APR"=>"APROBADO","RPR"=>"REPROBADO","EP"=>"EN PAPEL");
 									foreach($pagos AS $p=>$pago){
 								?>

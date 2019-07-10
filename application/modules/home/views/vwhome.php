@@ -53,7 +53,7 @@
 		<div class="login-box" id="main_header_box">
 			<div class="login-logo"><a href="<?php echo base_url(); ?>"><img style="width: 240px;" src="<?php echo base_url(); ?>img/logo_telcel_gray.png"></a></div>
 			<h3>Bienvenido(a) <?php echo $this->session->userdata("nombre"); ?></h3>
-			<h2>¿No es tu nombre? <a id="regenerate_session" href="#">Da click aquí para actualizar tus datos.</a></h2>
+			<h4>¿No es tu nombre? <a style="color:white;" id="regenerate_session" href="#">Da click aquí para actualizar tus datos.</a></h4>
 			<?php if(intval($this->session->userdata("idPermisos"))===0){ ?>
 			<h4>Tu grupo es: <?php echo $this->session->userdata("nombre_grupo"); ?></h4>
 			<?php }
@@ -62,11 +62,10 @@
 	        	elseif(intval($permisos[0]["idInstructor"])>0) $w=" AND id=(SELECT idCurso FROM despachos WHERE id=(SELECT idDespacho FROM instructores WHERE id='".$permisos[0]["idInstructor"]."'))";
 	        	else $w="";
 			}else $w=" AND id=(SELECT idCurso FROM despachos WHERE id=(SELECT idDespacho FROM instructores WHERE id=(SELECT idInstructor FROM grupos WHERE id='".$this->session->userdata("idGrupo")."'))) OR is_admin=1";
-			
-			$data = $controller->get_data("*", "cuestionarios", "date_end IS NULL $w", "id ASC", "", "");
-			if ($data !== FALSE) {
-				foreach ($data AS $e => $key) {
-					if (intval($key["is_new"]) === 0 && (intval($key["is_admin"])>0 && ($this->session->userdata("clave")==$controller->get_data("clave","cuestionarios","nombre like '%".MAIN_TEST."%'")[0]["clave"]) || $permisos!==FALSE) || intval($key["is_admin"])===0){
+			$data=$controller->get_data("*","cuestionarios","date_end IS NULL $w","id ASC","","");
+			if($data!==FALSE){
+				foreach($data AS $e => $key){
+					if((intval($key["is_admin"])>0 && ($this->session->userdata("clave")==$controller->get_data("clave","cuestionarios","nombre like '%".MAIN_TEST."%'")[0]["clave"]) || $permisos!==FALSE) || intval($key["is_admin"])===0){
 			?>
 	  		<div class="login-box-body quest_container quest_container_<?php echo $key["id"]; ?>" data-id="<?php echo $key["id"]; ?>" style="margin-bottom:30px;">
 	    		<p class="login-box-msg"><?php echo $key["nombre"]; ?></p>
@@ -191,7 +190,7 @@
 		    	});
 		  	});
 		  	$(document).ready(function(){
-		  		$("#regenerate_session").on("click",function(){this.location.reload();});
+		  		$("#regenerate_session").on("click",function(){location.reload(true);});
 		  		$(".start_admin_test").on("click",function(){
 		  			var id = $(this).attr("data-id");
 		  			var user = $(this).parent().find(".usuarios").val();
