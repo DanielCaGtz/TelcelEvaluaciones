@@ -1,0 +1,40 @@
+[17-Aug-2017 23:21:08 America/Mexico_City] PHP Fatal error:  Call to a member function sess_destroy() on a non-object in /Library/WebServer/Documents/telcel/application/hooks/checkSession.php on line 16
+[17-Aug-2017 23:23:20 America/Mexico_City] PHP Fatal error:  Call to undefined method CI::closesession() in /Library/WebServer/Documents/telcel/application/hooks/checkSession.php on line 16
+[17-Aug-2017 23:23:51 America/Mexico_City] PHP Fatal error:  Call to undefined function closesession() in /Library/WebServer/Documents/telcel/application/hooks/checkSession.php on line 16
+[17-Aug-2017 23:24:02 America/Mexico_City] PHP Fatal error:  Call to undefined function closesession() in /Library/WebServer/Documents/telcel/application/hooks/checkSession.php on line 16
+[28-Sep-2017 19:53:41 America/Mexico_City] PHP Fatal error:  Uncaught exception 'PHPExcel_Exception' with message 'Invalid character found in sheet title' in /Library/WebServer/Documents/telcel/addons/phpexcel/Classes/PHPExcel/Worksheet.php:467
+Stack trace:
+#0 /Library/WebServer/Documents/telcel/addons/phpexcel/Classes/PHPExcel/Worksheet.php(841): PHPExcel_Worksheet::_checkSheetTitle('<font><font>551...')
+#1 /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrhome.php(1504): PHPExcel_Worksheet->setTitle('<font><font>551...')
+#2 [internal function]: ctrHome->get_reporte_completo_individual()
+#3 /Library/WebServer/Documents/telcel/system/core/CodeIgniter.php(339): call_user_func_array(Array, Array)
+#4 /Library/WebServer/Documents/telcel/index.php(202): require_once('/Library/WebSer...')
+#5 {main}
+  thrown in /Library/WebServer/Documents/telcel/addons/phpexcel/Classes/PHPExcel/Worksheet.php on line 467
+[07-Mar-2018 11:42:06 America/Mexico_City] PHP Parse error:  parse error, expecting `"case (T_CASE)"' or `"default (T_DEFAULT)"' or `'}'' in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 34
+[07-Mar-2018 11:42:11 America/Mexico_City] PHP Parse error:  parse error, expecting `"case (T_CASE)"' or `"default (T_DEFAULT)"' or `'}'' in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 34
+[07-Mar-2018 11:42:15 America/Mexico_City] PHP Parse error:  parse error, expecting `"case (T_CASE)"' or `"default (T_DEFAULT)"' or `'}'' in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 34
+[07-Mar-2018 11:42:19 America/Mexico_City] PHP Parse error:  parse error, expecting `"case (T_CASE)"' or `"default (T_DEFAULT)"' or `'}'' in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 34
+[07-Mar-2018 11:42:49 America/Mexico_City] PHP Parse error:  parse error, expecting `"case (T_CASE)"' or `"default (T_DEFAULT)"' or `'}'' in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 34
+[07-Mar-2018 21:33:59 America/Mexico_City] PHP Parse error:  parse error in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 49
+[07-Mar-2018 21:34:13 America/Mexico_City] PHP Parse error:  parse error in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 49
+[07-Mar-2018 21:35:37 America/Mexico_City] PHP Parse error:  parse error in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 49
+[07-Mar-2018 21:36:01 America/Mexico_City] PHP Parse error:  parse error in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 51
+[07-Mar-2018 21:36:46 America/Mexico_City] PHP Parse error:  parse error in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 44
+[07-Mar-2018 21:38:27 America/Mexico_City] PHP Parse error:  parse error in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 51
+[07-Mar-2018 21:40:26 America/Mexico_City] PHP Parse error:  parse error in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 51
+[07-Mar-2018 21:40:49 America/Mexico_City] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 72 bytes) in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 43
+[07-Mar-2018 21:41:24 America/Mexico_City] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 130968 bytes) in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 50
+[07-Mar-2018 21:42:14 America/Mexico_City] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 72 bytes) in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 41
+[07-Mar-2018 21:42:28 America/Mexico_City] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 130968 bytes) in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 48
+[07-Mar-2018 21:43:11 America/Mexico_City] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 72 bytes) in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 41
+[07-Mar-2018 21:43:23 America/Mexico_City] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 72 bytes) in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 43
+[07-Mar-2018 21:44:16 America/Mexico_City] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 32 bytes) in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 43
+[08-Mar-2018 02:41:13 America/Mexico_City] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 72 bytes) in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 43
+[08-Mar-2018 02:41:54 America/Mexico_City] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 32 bytes) in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 41
+[08-Mar-2018 02:42:24 America/Mexico_City] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 32 bytes) in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 41
+[08-Mar-2018 02:42:41 America/Mexico_City] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 130968 bytes) in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 50
+[08-Mar-2018 02:43:29 America/Mexico_City] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 130968 bytes) in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 50
+[08-Mar-2018 02:44:07 America/Mexico_City] PHP Fatal error:  Call to undefined method ctrGraph::get_data_from_query() in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 51
+[08-Mar-2018 02:44:15 America/Mexico_City] PHP Fatal error:  Call to undefined method ctrGraph::get_data_from_query() in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 52
+[08-Mar-2018 02:44:44 America/Mexico_City] PHP Fatal error:  Call to undefined method ctrGraph::get_data() in /Library/WebServer/Documents/telcel/application/modules/home/controllers/ctrgraph.php on line 31
