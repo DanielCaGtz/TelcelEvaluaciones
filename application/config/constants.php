@@ -90,7 +90,7 @@ $whitelist = array('127.0.0.1', '::1');
 if (in_array($_SERVER['REMOTE_ADDR'], $whitelist))
   defined('FILE_ROUTE_FULL')     OR define('FILE_ROUTE_FULL', '/usr/local/var/www/telcel/');
 else
-  defined('FILE_ROUTE_FULL')     OR define('FILE_ROUTE_FULL', '/home/u465027285/public_html/telcelevaluaciones/');
+  defined('FILE_ROUTE_FULL')     OR define('FILE_ROUTE_FULL', '/home/u465027285/public_html/telcel_evaluaciones/');
 
 defined('CURRENT_VERSION')		OR define('CURRENT_VERSION','1.2.1');
 defined('MAIN_TEST')			OR define('MAIN_TEST','AVENTURA');
