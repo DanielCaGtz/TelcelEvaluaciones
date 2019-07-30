@@ -5,6 +5,7 @@ class ctrHome extends MX_Controller{
 	function __construct(){
 		parent::__construct();
 		$this->load->model('login/mdllogin');
+		$this->v2 = TRUE;
 		date_default_timezone_set('America/Mexico_City');
 		include FILE_ROUTE_FULL."addons/phpexcel/Classes/PHPExcel.php";
 		include FILE_ROUTE_FULL."addons/phpexcel/Classes/PHPExcel/Writer/Excel2007.php";
@@ -309,10 +310,10 @@ class ctrHome extends MX_Controller{
 		$this->session->set_userdata("data_temp",$temp);
 	}
 
-	public function start_quest($id_new){
-		if($this->session->userdata("id")){
-			$id=explode("A",$id_new)[0];
-			$user=explode("A",$id_new)[1];
+	public function start_quest ($id_new) {
+		if ($this->session->userdata("id")) {
+			$id = explode("A", $id_new)[0];
+			$user = explode("A", $id_new)[1];
 			$data["user"]=$user;
 			$data["controller"]=$this;
 			$data["id_cuestionario"]=$id;
@@ -362,15 +363,19 @@ class ctrHome extends MX_Controller{
 			}
 			if(date('Y-m-d')!=$data_grupos[0]["date_from"] && date('Y-m-d')!=$data_grupos[0]["date_to"]) redirect(base_url());
 			else{
-				print $this->load->view("vwheader",$data,TRUE);
-				print $this->load->view("vwquest",$data,TRUE);
-				print $this->load->view("vwfooter",$data,TRUE);
+				if ($this->v2) {
+					print $this->load->view("vwquestv2", $data, TRUE);
+				} else {
+					print $this->load->view("vwheader", $data, TRUE);
+					print $this->load->view("vwquest", $data, TRUE);
+					print $this->load->view("vwfooter", $data, TRUE);
+				}
 			}
 		}else redirect(base_url());
 	}
 
 	public function view_quest_pre($id_new){
-		$id=explode("A",$id_new)[0];
+		$id = explode("A", $id_new)[0];
 		$id_user=explode("A",$id_new)[1];
 		$data["user"]=$id_user;
 		$data["controller"]=$this;
@@ -379,9 +384,13 @@ class ctrHome extends MX_Controller{
 		$data["is_view"]=TRUE;
 		$data["actual_time"]=900;
 		$data["id_log"]=$this->get_data("id","log_historial","idCuestionario='$id' AND idUsuario='$id_user' AND date_end IS NULL","id ASC","","1")[0]["id"];
-		print $this->load->view("vwheader",$data,TRUE);
-		print $this->load->view("vwquest",$data,TRUE);
-		print $this->load->view("vwfooter",$data,TRUE);
+		if ($this->v2) {
+			print $this->load->view("vwquestv2_view", $data, TRUE);
+		} else {
+			print $this->load->view("vwheader",$data,TRUE);
+			print $this->load->view("vwquest",$data,TRUE);
+			print $this->load->view("vwfooter",$data,TRUE);
+		}
 	}
 
 	public function view_quest_post($id_new){
@@ -394,9 +403,13 @@ class ctrHome extends MX_Controller{
 		$data["is_view"]=TRUE;
 		$data["actual_time"]=900;
 		$data["id_log"]=$this->get_data("id","log_historial","idCuestionario='$id' AND idUsuario='$id_user' AND date_end IS NULL","id DESC","","1")[0]["id"];
-		print $this->load->view("vwheader",$data,TRUE);
-		print $this->load->view("vwquest",$data,TRUE);
-		print $this->load->view("vwfooter",$data,TRUE);
+		if ($this->v2) {
+			print $this->load->view("vwquestv2_view", $data, TRUE);
+		} else {
+			print $this->load->view("vwheader",$data,TRUE);
+			print $this->load->view("vwquest",$data,TRUE);
+			print $this->load->view("vwfooter",$data,TRUE);
+		}
 	}
 
 	public function graficar(){
