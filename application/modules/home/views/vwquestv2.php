@@ -121,12 +121,13 @@
 				$("#clock").countdown(time_, function(event) {
 					$(this).html(event.strftime('Tiempo restante: <span>%H:%M:%S</span>'));
 				}).on('finish.countdown', function() {
-					window.onbeforeunload = function() {}
+					window.onbeforeunload = function() {};
 					save_quest();
 				});
 				function save_quest () {
 					var id = $("#myform").attr("data-id");
 					var data = {};
+          window.onbeforeunload = function() {};
 					$.each($("#myform .ul_r"), function(i, item) {
 						var temp = {};
 						temp["idPregunta"] = $(item).find('input[type=radio]:checked').attr("data-parent");
