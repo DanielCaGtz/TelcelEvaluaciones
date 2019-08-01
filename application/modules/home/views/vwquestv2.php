@@ -93,7 +93,7 @@
                             name="r<?= $key['id'] ?>"
                             id="r<?= $item['id'] ?>"
                             class="r"
-                            <?= intval($idRespuesta) === intval($item["id"]) || $temp === intval($item['id']) ? "checked data-selected='1'" : "data-selected='0'" ?>
+                            <?= $temp === intval($item['id']) ? "checked data-selected='1'" : "data-selected='0'" ?>
                             >
                           <label for="r<?= $item['id'] ?>"><?= $item["nombre"] ?></label>
                         </li>
