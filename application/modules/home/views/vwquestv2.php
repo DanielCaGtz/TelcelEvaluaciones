@@ -62,18 +62,12 @@
       </div>
 			<section>
         <form id="myform" class="ac-custom ac-radio ac-fill" data-id="<?= $id_cuestionario; ?>" autocomplete="off">
-        <?php
-            if(count($data_temp) > 0) {
-              end($data_temp);
-              $last = key($data_temp);
-              $last = explode("P", $last)[1];
-              $last++;
-            } else $last = 0;
+          <?php
             $data = $controller->get_data("*", "preguntas", "idCuestionario = '$id_cuestionario' AND date_end IS NULL", "id ASC");
             if ($data !== FALSE) {
               foreach($data AS $e => $key) { ?>
                 <h2>
-                  <?= html_entity_decode($key["nombre"]) ?>
+                  <?= ($e + 1) . '.- ' . html_entity_decode($key["nombre"]) ?>
                 </h2>
                 <ul class="ul_r">
                   <?php
@@ -93,7 +87,12 @@
                             name="r<?= $key['id'] ?>"
                             id="r<?= $item['id'] ?>"
                             class="r"
-                            <?= $temp === intval($item['id']) ? "checked data-selected='1'" : "data-selected='0'" ?>
+                            <?=
+                              $temp === intval($item['id']) ||
+                              (array_key_exists('P'.$key["id"], $data_temp) && $data_temp['P'.$key['id']] == $item['id']) ?
+                                "checked data-selected='1'" :
+                                "data-selected='0'"
+                            ?>
                             >
                           <label for="r<?= $item['id'] ?>"><?= $item["nombre"] ?></label>
                         </li>
@@ -139,7 +138,10 @@
 						resp = JSON.parse(resp);
 						if (resp.success !== false) {
 							window.location.replace(window.url.base_url);
-						} else alert(resp.msg);
+						} else {
+              alert(resp.msg);
+              $("#submit_button").prop('disabled', false);
+            }
 					});
 				}
 

@@ -111,7 +111,7 @@
               }
             }
             ?>
-					<button class="fs-submit regresar_menu" type="button" data-href="<?= base_url() ?>">Cerrar revisión</button>
+					<button class="fs-submit regresar_menu" type="button" data-href="<?= base_url() ?>">Cerrar</button>
 				</form>
 			</section>
 		</div><!-- /container -->

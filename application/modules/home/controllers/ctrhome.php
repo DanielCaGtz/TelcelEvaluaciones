@@ -278,27 +278,40 @@ class ctrHome extends MX_Controller{
 		}else print json_encode(array("success"=>TRUE));
 	}
 
-	public function save_quest(){
-		$idCuestionario=$this->security->xss_clean($this->input->post("id"));
-		$data=$this->security->xss_clean($this->input->post("data"));
+	public function save_quest () {
+		$idCuestionario = $this->security->xss_clean($this->input->post('id'));
+		$data = $this->security->xss_clean($this->input->post('data'));
 		
-		$query="SELECT id FROM log_historial WHERE idCuestionario='$idCuestionario' AND idUsuario='".$this->session->userdata("id")."' AND id NOT IN (SELECT DISTINCT idLog FROM historial_preguntas);";
-		#echo $query;
-		$insert_one=$this->get_data_from_query($query);
-		if($insert_one!==FALSE){
-			$insert_one=$insert_one[0]["id"];
-			foreach($data AS $e=>$key){
-				$temp=array(
-					"idPregunta"	=> $key["idPregunta"],
-					"idRespuesta"	=> intval($key["idRespuesta"]),
-					"idUsuario"		=> $this->session->userdata("id"),
-					"idLog"			=> $insert_one
-				);
-				$this->mdllogin->insertData($temp,"historial_preguntas");
+		$query =
+			"SELECT id FROM log_historial WHERE idCuestionario='$idCuestionario' AND idUsuario='".$this->session->userdata('id')."';";
+		$insert_one = $this->get_data_from_query($query);
+		if ($insert_one !== FALSE) {
+			$insert_one = $insert_one[0]['id'];
+			foreach ($data AS $e => $key) {
+				$data_temp = $this->get_data('id', 'historial_preguntas',
+					"idPregunta = '".$key['idPregunta']."' AND 
+					idRespuesta = '".$key['idRespuesta']."' AND 
+					idUsuario = '".$this->session->userdata('id')."' AND
+					idLog = '".$insert_one."'");
+
+				if (!$data_temp) {
+					$temp = array(
+						'idPregunta' => $key['idPregunta'],
+						'idRespuesta' => intval($key['idRespuesta']),
+						'idUsuario' => $this->session->userdata('id'),
+						'idLog' => $insert_one
+					);
+					$this->mdllogin->insertData($temp, 'historial_preguntas');
+				}
 			}
-			$this->session->set_userdata("data_temp",array());
-			print json_encode(array("success"=>TRUE));
-		}else print json_encode(array("success"=>FALSE,"msg"=>"Hubo un error en la base de datos. Intente de nuevo más tarde."));
+			$this->session->set_userdata('data_temp', array());
+			print json_encode(array('success' => TRUE));
+		} else {
+			print json_encode(array(
+				'success' => FALSE,
+				'msg' => 'Hubo un error en la base de datos. Intente de nuevo más tarde.'
+			));
+		}
 	}
 
 	public function save_pregunta_temp(){
@@ -322,6 +335,8 @@ class ctrHome extends MX_Controller{
 			$data["data_temp"]=$this->session->userdata("data_temp");
 
 			$data_grupos=$this->get_data("date_from, date_to","grupos","id='".$this->session->userdata("idGrupo")."'");
+			$isPreToday = date('Y-m-d') == $data_grupos[0]["date_from"];
+			$isPostToday = date('Y-m-d') == $data_grupos[0]["date_to"];
 
 			$result=$this->get_data_from_query("SELECT id, date_start, pre_post FROM log_historial WHERE idCuestionario='$id' AND idUsuario='".$this->session->userdata("id")."' AND id NOT IN (SELECT DISTINCT idLog FROM historial_preguntas);");
 			if($result!==FALSE){//PENDING QUEST
@@ -343,23 +358,36 @@ class ctrHome extends MX_Controller{
 					$this->session->set_userdata("data_temp",array());
 					redirect(base_url());
 				}
-			}else{
-				$exists=0;
-				$p=$this->get_data_from_query("SELECT pre_post FROM log_historial WHERE idCuestionario='$id' AND idUsuario='".$this->session->userdata("id")."' AND date_end IS NULL;");
-				if($p!==FALSE){
-					if(intval($p[0]["pre_post"])===0) $exists=1;
-					elseif(intval($p[0]["pre_post"])>1) $exists=2;
+			} else {
+				$exists = 0;
+				$p = $this->get_data_from_query("SELECT pre_post FROM log_historial WHERE idCuestionario='$id' AND idUsuario='".$this->session->userdata("id")."' AND date_end IS NULL;");
+				if ($p !== FALSE) {
+					if (intval($p[0]["pre_post"]) === 0) {
+						$exists = 1;
+					} elseif (intval($p[0]["pre_post"]) === 1) {
+						$exists = 2;
+					}
 				}
-				if((intval($exists)===0 && date('Y-m-d')==$data_grupos[0]["date_from"]) || (intval($exists)===1 && date('Y-m-d')==$data_grupos[0]["date_to"])){
-					$log_historial=array(
-						"idCuestionario"=> $id,
-						"idUsuario"		=> $this->session->userdata("id"),
-						"date_start"	=> date('Y-m-d H:i:s'),
-						"pre_post"		=> $exists
-					);
-					$data["insert_one"]=$this->mdllogin->insertData($log_historial,"log_historial");
-					$data["actual_time"]=900;
-				}else redirect(base_url());
+				if ((intval($exists) === 0 && $isPreToday && !$p) || (intval($exists) === 1 && $isPostToday)) {
+					$data_temp = $this->get_data('id', 'log_historial',
+						"idCuestionario = '$id' AND
+						idUsuario = '".$this->session->userdata('id')."' AND
+						pre_post = '$exists'");
+					if ($data_temp === FALSE) {
+						$log_historial = array(
+							"idCuestionario" => $id,
+							"idUsuario" => $this->session->userdata("id"),
+							"date_start" => date('Y-m-d H:i:s'),
+							"pre_post" => $exists
+						);
+						$data["insert_one"] = $this->mdllogin->insertData($log_historial, "log_historial");
+						$data["actual_time"] = 900;
+					} else {
+						redirect(base_url());
+					}
+				} else {
+					redirect(base_url());
+				}
 			}
 			if(date('Y-m-d')!=$data_grupos[0]["date_from"] && date('Y-m-d')!=$data_grupos[0]["date_to"]) redirect(base_url());
 			else{
