@@ -11,6 +11,13 @@ class ctrHome extends MX_Controller{
 		include FILE_ROUTE_FULL."addons/phpexcel/Classes/PHPExcel/Writer/Excel2007.php";
 		include FILE_ROUTE_FULL."addons/phpexcel/Classes/PHPExcel/IOFactory.php";
 	}
+	
+	private function get_pre_post() {
+		$today = date('Y-m-d');
+		if($this->session->userdata('date_from') == $today)
+			return "0";
+		return "1";
+	}
 
 	public function index(){
 		if($this->session->userdata("id")){
@@ -281,16 +288,17 @@ class ctrHome extends MX_Controller{
 	public function save_quest () {
 		$idCuestionario = $this->security->xss_clean($this->input->post('id'));
 		$data = $this->security->xss_clean($this->input->post('data'));
+		$get_pre_post = $this->get_pre_post();
 		
 		$query =
-			"SELECT id FROM log_historial WHERE idCuestionario='$idCuestionario' AND idUsuario='".$this->session->userdata('id')."';";
+			"SELECT id FROM log_historial WHERE pre_post='$get_pre_post' AND idCuestionario='$idCuestionario' AND idUsuario='".$this->session->userdata('id')."';";
 		$insert_one = $this->get_data_from_query($query);
 		if ($insert_one !== FALSE) {
 			$insert_one = $insert_one[0]['id'];
 			foreach ($data AS $e => $key) {
 				$data_temp = $this->get_data('id', 'historial_preguntas',
 					"idPregunta = '".$key['idPregunta']."' AND 
-					idRespuesta = '".$key['idRespuesta']."' AND 
+					idRespuesta = '".intval($key['idRespuesta'])."' AND 
 					idUsuario = '".$this->session->userdata('id')."' AND
 					idLog = '".$insert_one."'");
 
@@ -1667,7 +1675,7 @@ class ctrHome extends MX_Controller{
 					//*
 					if(intval($cuestionario["is_admin"])===0){
 						if(intval($key["id"])>0){
-							$resp=$this->get_data_from_query("SELECT ppal.*, det.is_correct FROM historial_preguntas AS ppal LEFT JOIN respuestas AS det ON ppal.idRespuesta=det.id WHERE ppal.idLog='".$key["id"]."'");
+							$resp=$this->get_data_from_query("SELECT ppal.*, det.is_correct FROM historial_preguntas AS ppal LEFT JOIN respuestas AS det ON ppal.idRespuesta=det.id WHERE ppal.idLog='".$key["id"]."' GROUP BY ppal.idPregunta ORDER BY ppal.id DESC;");
 							$a='A';
 							$aciertos=0;
 							$objPHPExcel->getActiveSheet()->SetCellValue(strval($a++).$s, $key["numero"]);
